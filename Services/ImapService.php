@@ -4,6 +4,7 @@ namespace Webeith\ImapBundle\Services;
 
 use Webeith\ImapBundle\Exception\DirNotExistsException,
     Webeith\ImapBundle\Exception\NotFoundMailboxException;
+use PhpImap\Mailbox;
 
 /**
  * ImapService
@@ -55,7 +56,7 @@ class ImapService
             throw new DirNotExistsException('It is not dir: ' . $config['attachments_dir']);
         }
 
-        $this->mailboxes[$name] = new \ImapMailbox($config['connection_string'], $config['login'], $config['password'], $config['attachments_dir'], $config['encoding']);
+        $this->mailboxes[$name] = new Mailbox($config['connection_string'], $config['login'], $config['password'], $config['attachments_dir'], $config['encoding']);
 
         return $this->mailboxes[$name];
     }
